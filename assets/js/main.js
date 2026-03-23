@@ -78,4 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.toggle('active');
         });
     });
+
+    // Estimated Result Logic for Promote Form
+    const priceInput = document.getElementById('price');
+    const categorySelect = document.getElementById('category');
+    const estimatedResult = document.getElementById('estimated-result');
+
+    if (priceInput && categorySelect && estimatedResult) {
+        const updateEstimate = () => {
+            const budget = parseFloat(priceInput.value) || 0;
+            const type = categorySelect.value;
+            let estimate = 0;
+            let unit = '';
+
+            if (type === 'VideoViews') {
+                estimate = Math.floor(budget * 15);
+                unit = 'Views';
+            } else if (type === 'LikeComments') {
+                estimate = Math.floor(budget * 1.5);
+                unit = 'Likes & Comments';
+            } else if (type === 'Followers') {
+                estimate = Math.floor(budget * 0.8);
+                unit = 'Followers';
+            }
+
+            estimatedResult.textContent = `Estimated: ${estimate.toLocaleString()} ${unit}`;
+        };
+
+        priceInput.addEventListener('input', updateEstimate);
+        categorySelect.addEventListener('change', updateEstimate);
+    }
 });

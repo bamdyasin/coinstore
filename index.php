@@ -11,28 +11,28 @@ include 'includes/header.php';
     </div>
 
     <!-- Promote Form Section (Visible by default) -->
-    <div id="promote-section" style="display: block; max-width: 600px; margin: 0 auto; padding-top: 0rem;">
+    <div id="promote-section" style="display: block; max-width: 800px; margin: 0 auto; padding-top: 0rem;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">🚀 Promote Your Coin</h3>
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">🚀 Promote Your Video</h3>
             <form action="process_promote.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="coin_title">Coin Title</label>
-                    <input type="text" id="coin_title" name="coin_title" placeholder="e.g. Rare 1921 Silver Dollar" required>
+                    <label for="coin_title">Video Link</label>
+                    <input type="text" id="coin_title" name="coin_title" placeholder="Enter Your Video Link..." required>
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Category</label>
+                    <label for="category">Promote Type</label>
                     <select id="category" name="category">
-                        <option value="gold">Gold</option>
-                        <option value="silver">Silver</option>
-                        <option value="ancient">Ancient</option>
-                        <option value="commemorative">Commemorative</option>
+                        <option value="VideoViews">More Video Views</option>
+                        <option value="LikeComments">Like & Comments</option>
+                        <option value="Followers">More Followers</option> 
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Expected Price (৳)</label>
-                    <input type="number" id="price" name="price" placeholder="5000" required>
+                    <label for="price">Your Budget (৳)</label>
+                    <input type="number" id="price" name="price" placeholder="TK. 100" required>
+                    <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Estimated: 0 Views</div>
                 </div>
 
                 <div class="form-group">
@@ -66,9 +66,9 @@ include 'includes/header.php';
     </div>
 
     <!-- GetCoin Section -->
-    <div id="getcoin-section" style="display: none; max-width: 600px; margin: 0 auto;">
+    <div id="getcoin-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💎 Request a Rare Coin</h3>
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💎 Request For Coin</h3>
             <p style="text-align: center; font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Looking for something specific? Let our experts find it for you.</p>
             <form action="process_getcoin.php" method="POST">
                 <div class="form-group">
@@ -105,7 +105,7 @@ include 'includes/header.php';
     </div>
     
     <!-- Business Section -->
-    <div id="business-section" style="display: none; max-width: 700px; margin: 0 auto;">
+    <div id="business-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--secondary-color);">
             <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;">🏢 Business Partnership Application</h3>
             <form action="process_business.php" method="POST">
@@ -154,23 +154,25 @@ include 'includes/header.php';
 <!-- Q&A (FAQ) Section -->
 <section class="faq-section">
     <div class="container">
-        <h3 class="section-title">Frequently Asked Questions</h3>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-question">How do I know the coins are authentic? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Every coin promoted on our platform undergoes a rigorous multi-step verification process by our in-house experts and third-party grading services.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">What is the "Promote" feature? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">The Promote feature allows collectors to showcase their rare items on the homepage or at the top of search results to reach thousands of potential buyers.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Is shipping secure across Bangladesh? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Yes, we use insured, high-security logistics partners to ensure your valuable coins reach you discreetly and safely anywhere in Bangladesh.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">How can I become a business partner? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Simply fill out the form in the "Business" tab. Our team will review your application and contact you within 48 hours for onboarding.</div>
+        <div class="faq-content">
+            <h2 class="section-title">Customer Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">How do I know the coins are authentic? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Every coin promoted on our platform undergoes a rigorous multi-step verification process by our in-house experts and third-party grading services.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the "Promote" feature? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">The Promote feature allows collectors to showcase their rare items on the homepage or at the top of search results to reach thousands of potential buyers.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is shipping secure across Bangladesh? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Yes, we use insured, high-security logistics partners to ensure your valuable coins reach you discreetly and safely anywhere in Bangladesh.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I become a business partner? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Simply fill out the form in the "Business" tab. Our team will review your application and contact you within 48 hours for onboarding.</div>
+                </div>
             </div>
         </div>
     </div>
@@ -202,31 +204,35 @@ include 'includes/header.php';
 </section>
 
 <!-- Reviews Section -->
-<section class="reviews-section container">
-    <h3 class="section-title">Collector Testimonials</h3>
-    <div class="reviews-grid">
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Found a rare 1921 Silver Dollar in pristine condition. The authentication process gave me complete peace of mind. Best in BD!"</p>
-            <div class="reviewer">
-                <strong>Ahmed Tanvir</strong>
-                <span>Verified Collector</span>
-            </div>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"The business partnership has been a game-changer for my local shop. Their inventory management tools are top-notch."</p>
-            <div class="reviewer">
-                <strong>Rahat Kabir</strong>
-                <span>Dealer Partner</span>
-            </div>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★☆</div>
-            <p>"Great customer support. They helped me find a specific ancient Roman coin I've been looking for for years."</p>
-            <div class="reviewer">
-                <strong>Sultana Kamal</strong>
-                <span>Hobbyist</span>
+<section class="reviews-section">
+    <div class="container">
+        <div class="reviews-content">
+            <h3 class="section-title">Collector Testimonials</h3>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Found a rare 1921 Silver Dollar in pristine condition. The authentication process gave me complete peace of mind. Best in BD!"</p>
+                    <div class="reviewer">
+                        <strong>Ahmed Tanvir</strong>
+                        <span>Verified Collector</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The business partnership has been a game-changer for my local shop. Their inventory management tools are top-notch."</p>
+                    <div class="reviewer">
+                        <strong>Rahat Kabir</strong>
+                        <span>Dealer Partner</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Great customer support. They helped me find a specific ancient Roman coin I've been looking for for years."</p>
+                    <div class="reviewer">
+                        <strong>Sultana Kamal</strong>
+                        <span>Hobbyist</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
