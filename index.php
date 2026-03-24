@@ -31,13 +31,17 @@ include 'includes/header.php';
 
                 <div class="form-group">
                     <label for="price">Your Budget (৳)</label>
-                    <input type="number" id="price" name="price" placeholder="TK. 100" min="100" required>
-                    <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Estimated: 0 Views</div>
+                    <div class="stepper-group">
+                        <input type="number" id="price" name="price" value="100" min="100" readonly required>
+                        <button type="button" id="minus-btn" class="stepper-btn">−</button>
+                        <button type="button" id="plus-btn" class="stepper-btn">+</button>
+                    </div>
+                    <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Estimated: 1,500 Views</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="whatsapp">WhatsApp Contact Number</label>
-                    <input type="text" id="whatsapp" name="whatsapp" placeholder="01XXX-XXXXXX" required>
+                    <label for="whatsapp">WhatsApp Number</label>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="+8801XXX-XXXXXX" required>
                 </div>
 
                 <div class="form-group">
@@ -55,7 +59,7 @@ include 'includes/header.php';
 
                 <div class="form-group">
                     <label for="promote_trxid">Transaction ID</label>
-                    <textarea id="promote_trxid" name="description" rows="1" placeholder="Input transaction ID or full message" required></textarea>
+                    <textarea id="promote_trxid" name="description" rows="1" placeholder="Enter TrxID Here" required></textarea>
                 </div>
  
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">🚀 Submit for Review</button>
@@ -67,17 +71,16 @@ include 'includes/header.php';
     <div id="getcoin-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
             <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💎 Request For Coin</h3>
-            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Looking for something specific? Let our experts find it for you.</p>
-            <form id="getcoinForm" action="process_getcoin.php" method="POST">
+           <form id="getcoinForm" action="process_getcoin.php" method="POST">
                 <div class="form-group">
                     <label for="coin_amount">Coin Amount</label>
-                    <input type="number" id="coin_amount" name="coin_amount" placeholder="Enter amount of coins" min="50" required>
+                    <input type="number" id="coin_amount" name="coin_amount" placeholder="Enter coins amount" min="50" required>
                     <div id="coin-price-display" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Total Price: 0 ৳</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="whatsapp">WhatsApp Contact Number</label>
-                    <input type="text" id="whatsapp" name="whatsapp" placeholder="01XXX-XXXXXX" required>
+                    <label for="whatsapp">WhatsApp Number</label>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="+8801XXX-XXXXXX" required>
                 </div>
                 
                 <div class="form-group">
@@ -95,7 +98,7 @@ include 'includes/header.php';
 
                 <div class="form-group">
                     <label for="getcoin_trxid">Transaction ID</label>
-                    <textarea id="getcoin_trxid" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
+                    <textarea id="getcoin_trxid" name="description" rows="3" placeholder="Enter TrxID Here" required></textarea>
                 </div>
  
 

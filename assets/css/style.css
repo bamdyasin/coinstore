@@ -793,6 +793,48 @@ footer {
     color: var(--secondary-color);
 }
 
+/* Stepper Styles */
+.stepper-group {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.stepper-btn {
+    background: var(--bg-light);
+    border: none;
+    color: var(--secondary-color);
+    width: 50px;
+    height: 45px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.stepper-btn:hover {
+    background: #eee;
+}
+
+.stepper-btn:active {
+    background: #ddd;
+}
+
+.stepper-group input {
+    flex: 1;
+    border: none !important;
+    text-align: left;
+    padding-left: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background: transparent;
+    pointer-events: none; /* Extra safety for readonly */
+}
+
 /* Modal Styles */
 .modal {
     display: none;

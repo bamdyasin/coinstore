@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceInput = document.getElementById('price');
     const categorySelect = document.getElementById('category');
     const estimatedResult = document.getElementById('estimated-result');
+    const plusBtn = document.getElementById('plus-btn');
+    const minusBtn = document.getElementById('minus-btn');
 
     if (priceInput && categorySelect && estimatedResult) {
         const updateEstimate = () => {
@@ -105,7 +107,30 @@ document.addEventListener('DOMContentLoaded', () => {
             estimatedResult.textContent = `Estimated: ${estimate.toLocaleString()} ${unit}`;
         };
 
-        priceInput.addEventListener('input', updateEstimate);
+        if (plusBtn && minusBtn) {
+            plusBtn.addEventListener('click', () => {
+                let current = parseInt(priceInput.value);
+                if (current === 100) {
+                    priceInput.value = 200;
+                } else {
+                    priceInput.value = current + 200;
+                }
+                updateEstimate();
+            });
+
+            minusBtn.addEventListener('click', () => {
+                let current = parseInt(priceInput.value);
+                if (current > 100) {
+                    if (current === 200) {
+                        priceInput.value = 100;
+                    } else {
+                        priceInput.value = current - 200;
+                    }
+                    updateEstimate();
+                }
+            });
+        }
+
         categorySelect.addEventListener('change', updateEstimate);
     }
 
@@ -117,9 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (paymentSelect && agentDisplay && agentNumber && paymentMethodName) {
         const agentNumbers = {
-            'Bkash': '01712345678',
-            'Nagad': '01912345678',
-            'Rocket': '01812345678'
+            'Bkash': '01342719542',
+            'Nagad': '01342719542',
+            'Rocket': '01342719542'
         };
 
         paymentSelect.addEventListener('change', () => {
