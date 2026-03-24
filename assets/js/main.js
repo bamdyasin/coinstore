@@ -170,4 +170,91 @@ document.addEventListener('DOMContentLoaded', () => {
             coinPriceDisplay.textContent = `Total Price: ${totalPrice.toLocaleString()} Taka`;
         });
     }
+
+    // Order Status Search Logic
+    const searchForm = document.getElementById('searchStatusForm');
+    const searchInput = document.getElementById('searchTrxID');
+    const statusModal = document.getElementById('statusModal');
+    const statusResult = document.getElementById('statusResult');
+    const closeModal = document.querySelector('.close-modal');
+
+    if (searchForm && searchInput && statusModal && statusResult) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const trxid = searchInput.value.trim();
+
+            if (!trxid) {
+                alert('Please enter a Transaction ID');
+                return;
+            }
+
+            // Show loading or just fetch
+            statusResult.innerHTML = '<div style="text-align:center; padding:2rem;">Searching...</div>';
+            statusModal.style.display = 'block';
+
+            fetch(`search_status.php?trxid=${encodeURIComponent(trxid)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        statusResult.innerHTML = data.html;
+                    } else {
+                        statusResult.innerHTML = `<div class="status-error">
+                            <h3>Not Found</h3>
+                            <p>${data.message}</p>
+                        </div>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    statusResult.innerHTML = '<div class="status-error"><p>An error occurred. Please try again.</p></div>';
+                });
+        });
+    }
+
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            statusModal.style.display = 'none';
+        });
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === statusModal) {
+            statusModal.style.display = 'none';
+        }
+    });
+
+    // Form Submission Duplicate Check
+    const promoteForm = document.getElementById('promoteForm');
+    const getcoinForm = document.getElementById('getcoinForm');
+
+    const checkAndSubmit = (form, trxInputId) => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const trxid = document.getElementById(trxInputId).value.trim();
+
+            fetch(`check_duplicate_trxid.php?trxid=${encodeURIComponent(trxid)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.duplicate) {
+                        // Show Error Popup
+                        statusResult.innerHTML = `<div class="status-error">
+                            <h3 style="color:#e74c3c;">Duplicate TrxID</h3>
+                            <p>Error: This Transaction ID has already been used. Please provide a unique TrxID.</p>
+                        </div>`;
+                        statusModal.style.display = 'block';
+                    } else {
+                        // Unique, proceed with normal submission
+                        form.submit();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    form.submit(); // Fallback to normal submit on error
+                });
+        });
+    };
+
+    if (promoteForm) checkAndSubmit(promoteForm, 'promote_trxid');
+    if (getcoinForm) checkAndSubmit(getcoinForm, 'getcoin_trxid');
 });

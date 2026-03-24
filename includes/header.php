@@ -17,8 +17,8 @@
         </div>
 
         <div class="search-container">
-            <form action="shop.php" method="GET">
-                <input type="text" name="search" placeholder="Search rare coins..." aria-label="Search">
+            <form id="searchStatusForm">
+                <input type="text" id="searchTrxID" name="search" placeholder="Enter TrxID for Order Status" aria-label="Search">
                 <button type="submit">🔍</button>
             </form>
         </div>

@@ -33,6 +33,16 @@
             <p>&copy; <?php echo date('Y'); ?> CoinStoreBD. All rights reserved.</p>
         </div>
     </footer>
+    <!-- Order Status Modal -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="statusResult">
+                <!-- Result will be loaded here via AJAX -->
+            </div>
+        </div>
+    </div>
+
     <script src="assets/js/main.js"></script>
 </body>
 </html>

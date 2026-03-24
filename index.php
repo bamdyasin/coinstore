@@ -14,7 +14,7 @@ include 'includes/header.php';
     <div id="promote-section" style="display: block; max-width: 800px; margin: 0 auto; padding-top: 0rem;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
             <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">🚀 Promote Your Video</h3>
-            <form action="process_promote.php" method="POST" enctype="multipart/form-data">
+            <form id="promoteForm" action="process_promote.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="coin_title">Video Link</label>
                     <input type="text" id="coin_title" name="coin_title" placeholder="Enter Your Video Link..." required>
@@ -54,8 +54,8 @@ include 'includes/header.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Transaction ID</label>
-                    <textarea id="description" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
+                    <label for="promote_trxid">Transaction ID</label>
+                    <textarea id="promote_trxid" name="description" rows="1" placeholder="Input transaction ID or full message" required></textarea>
                 </div>
  
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">🚀 Submit for Review</button>
@@ -68,7 +68,7 @@ include 'includes/header.php';
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
             <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💎 Request For Coin</h3>
             <p style="text-align: center; font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Looking for something specific? Let our experts find it for you.</p>
-            <form action="process_getcoin.php" method="POST">
+            <form id="getcoinForm" action="process_getcoin.php" method="POST">
                 <div class="form-group">
                     <label for="coin_amount">Coin Amount</label>
                     <input type="number" id="coin_amount" name="coin_amount" placeholder="Enter amount of coins" min="50" required>
@@ -94,8 +94,8 @@ include 'includes/header.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Transaction ID</label>
-                    <textarea id="description" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
+                    <label for="getcoin_trxid">Transaction ID</label>
+                    <textarea id="getcoin_trxid" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
                 </div>
  
 
