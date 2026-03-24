@@ -108,4 +108,66 @@ document.addEventListener('DOMContentLoaded', () => {
         priceInput.addEventListener('input', updateEstimate);
         categorySelect.addEventListener('change', updateEstimate);
     }
+
+    // Payment Option Logic
+    const paymentSelect = document.getElementById('payment_option');
+    const agentDisplay = document.getElementById('agent-number-display');
+    const agentNumber = document.getElementById('agent-number');
+    const paymentMethodName = document.getElementById('payment-method-name');
+
+    if (paymentSelect && agentDisplay && agentNumber && paymentMethodName) {
+        const agentNumbers = {
+            'Bkash': '01712345678',
+            'Nagad': '01912345678',
+            'Rocket': '01812345678'
+        };
+
+        paymentSelect.addEventListener('change', () => {
+            const selected = paymentSelect.value;
+            if (selected && agentNumbers[selected]) {
+                paymentMethodName.textContent = selected;
+                agentNumber.textContent = agentNumbers[selected];
+                agentDisplay.style.display = 'block';
+            } else {
+                agentDisplay.style.display = 'none';
+            }
+        });
+    }
+
+    // Payment Option Logic (GetCoin Form)
+    const getcoinPaymentSelect = document.getElementById('getcoin_payment_option');
+    const getcoinAgentDisplay = document.getElementById('getcoin-agent-number-display');
+    const getcoinAgentNumber = document.getElementById('getcoin-agent-number');
+    const getcoinPaymentMethodName = document.getElementById('getcoin-payment-method-name');
+
+    if (getcoinPaymentSelect && getcoinAgentDisplay && getcoinAgentNumber && getcoinPaymentMethodName) {
+        const agentNumbers = {
+            'Bkash': '01712345678',
+            'Nagad': '01912345678',
+            'Rocket': '01812345678'
+        };
+
+        getcoinPaymentSelect.addEventListener('change', () => {
+            const selected = getcoinPaymentSelect.value;
+            if (selected && agentNumbers[selected]) {
+                getcoinPaymentMethodName.textContent = selected;
+                getcoinAgentNumber.textContent = agentNumbers[selected];
+                getcoinAgentDisplay.style.display = 'block';
+            } else {
+                getcoinAgentDisplay.style.display = 'none';
+            }
+        });
+    }
+
+    // Coin Price Calculation Logic (GetCoin Form)
+    const coinAmountInput = document.getElementById('coin_amount');
+    const coinPriceDisplay = document.getElementById('coin-price-display');
+
+    if (coinAmountInput && coinPriceDisplay) {
+        coinAmountInput.addEventListener('input', () => {
+            const amount = parseFloat(coinAmountInput.value) || 0;
+            const totalPrice = amount * 2;
+            coinPriceDisplay.textContent = `Total Price: ${totalPrice.toLocaleString()} Taka`;
+        });
+    }
 });

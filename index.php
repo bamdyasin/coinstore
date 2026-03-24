@@ -31,36 +31,34 @@ include 'includes/header.php';
 
                 <div class="form-group">
                     <label for="price">Your Budget (৳)</label>
-                    <input type="number" id="price" name="price" placeholder="TK. 100" required>
+                    <input type="number" id="price" name="price" placeholder="TK. 100" min="100" required>
                     <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Estimated: 0 Views</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" placeholder="Describe the history and condition..."></textarea>
+                    <label for="whatsapp">WhatsApp Contact Number</label>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="01XXX-XXXXXX" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Choose Promotion Plan</label>
-                    <div class="plan-selector">
-                        <label class="plan-option">
-                            <input type="radio" name="plan" value="silver" checked>
-                            <div class="plan-info">
-                                <strong>Silver (৳499)</strong>
-                                <span>7 Days Featured</span>
-                            </div>
-                        </label>
-                        <label class="plan-option">
-                            <input type="radio" name="plan" value="gold">
-                            <div class="plan-info">
-                                <strong>Gold (৳1,499)</strong>
-                                <span>30 Days + Homepage</span>
-                            </div>
-                        </label>
+                    <label for="payment_option">Payment Option</label>
+                    <select id="payment_option" name="payment_option" required>
+                        <option value="">Select Payment Option</option>
+                        <option value="Bkash">Bkash Number</option>
+                        <option value="Nagad">Nagad Number</option>
+                        <option value="Rocket">Rocket Number</option>
+                    </select>
+                    <div id="agent-number-display" style="margin-top: 0.5rem; font-weight: bold; color: var(--secondary-color); display: none;">
+                        <span id="payment-method-name"></span> Agent: <span id="agent-number"></span>
                     </div>
                 </div>
 
-                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Submit for Review</button>
+                <div class="form-group">
+                    <label for="description">Transaction ID</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
+                </div>
+ 
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">🚀 Submit for Review</button>
             </form>
         </div>
     </div>
@@ -72,32 +70,34 @@ include 'includes/header.php';
             <p style="text-align: center; font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Looking for something specific? Let our experts find it for you.</p>
             <form action="process_getcoin.php" method="POST">
                 <div class="form-group">
-                    <label for="search_coin">What coin are you looking for?</label>
-                    <input type="text" id="search_coin" name="search_coin" placeholder="e.g. 1804 Silver Dollar" required>
+                    <label for="coin_amount">Coin Amount</label>
+                    <input type="number" id="coin_amount" name="coin_amount" placeholder="Enter amount of coins" min="50" required>
+                    <div id="coin-price-display" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Total Price: 0 ৳</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="metal_preference">Metal Preference</label>
-                    <select id="metal_preference" name="metal_preference">
-                        <option value="any">Any Metal</option>
-                        <option value="gold">Gold</option>
-                        <option value="silver">Silver</option>
-                        <option value="copper">Copper/Bronze</option>
+                    <label for="whatsapp">WhatsApp Contact Number</label>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="01XXX-XXXXXX" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="getcoin_payment_option">Payment Option</label>
+                    <select id="getcoin_payment_option" name="payment_option" required>
+                        <option value="">Select Payment Option</option>
+                        <option value="Bkash">Bkash Number</option>
+                        <option value="Nagad">Nagad Number</option>
+                        <option value="Rocket">Rocket Number</option>
                     </select>
+                    <div id="getcoin-agent-number-display" style="margin-top: 0.5rem; font-weight: bold; color: var(--secondary-color); display: none;">
+                        <span id="getcoin-payment-method-name"></span> Agent: <span id="getcoin-agent-number"></span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="budget">Your Budget (৳)</label>
-                    <input type="number" id="budget" name="budget" placeholder="Maximum ৳" required>
+                    <label for="description">Transaction ID</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Input transaction ID or full message" required></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label for="contact_method">Preferred Contact Method</label>
-                    <select id="contact_method" name="contact_method">
-                        <option value="email">Email</option>
-                        <option value="phone">Phone / WhatsApp</option>
-                    </select>
-                </div>
+ 
 
                 <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Send Request</button>
             </form>
