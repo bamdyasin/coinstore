@@ -2,7 +2,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>CoinStoreBD</h3>
-                <p>Your trusted source for authentic rare and collectible coins in Bangladesh. We preserve history through numismatics.</p>
+                <p><?php echo $s['footer_about'] ?? 'Your trusted source for authentic rare and collectible coins in Bangladesh.'; ?></p>
             </div>
             
 
@@ -30,7 +30,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> CoinStoreBD. All rights reserved.</p>
+            <p><?php echo $s['footer_copyright'] ?? '&copy; ' . date('Y') . ' CoinStoreBD. All rights reserved.'; ?></p>
         </div>
     </footer>
     <!-- Order Status Modal -->

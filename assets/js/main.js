@@ -90,21 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const updateEstimate = () => {
             const budget = parseFloat(priceInput.value) || 0;
             const type = categorySelect.value;
-            let estimate = 0;
-            let unit = '';
+            let displayValue = '';
 
             if (type === 'VideoViews') {
-                estimate = Math.floor(budget * 15);
-                unit = 'Views';
+                const views = Math.floor(budget * (parseFloat(siteSettings.rate_views) || 25));
+                const likes = Math.floor(budget * (parseFloat(siteSettings.rate_likes) || 5));
+                displayValue = `Estimated: ${views.toLocaleString()} Views & ${likes.toLocaleString()} Likes`;
             } else if (type === 'LikeComments') {
-                estimate = Math.floor(budget * 1.5);
-                unit = 'Likes & Comments';
+                const views = Math.floor(budget * 20);
+                const likes = Math.floor(budget * 6);
+                displayValue = `Estimated: ${views.toLocaleString()} Views & ${likes.toLocaleString()} Likes & Comments`;
             } else if (type === 'Followers') {
-                estimate = Math.floor(budget * 0.8);
-                unit = 'Followers';
+                const followers = Math.floor(budget * (parseFloat(siteSettings.rate_followers) || 2));
+                const views = Math.floor(budget * 20);
+                displayValue = `Estimated: ${views.toLocaleString()} Views & ${followers.toLocaleString()} Followers`;
             }
 
-            estimatedResult.textContent = `Estimated: ${estimate.toLocaleString()} ${unit}`;
+            estimatedResult.textContent = displayValue;
         };
 
         if (plusBtn && minusBtn) {
@@ -167,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (getcoinPaymentSelect && getcoinAgentDisplay && getcoinAgentNumber && getcoinPaymentMethodName) {
         const agentNumbers = {
-            'Bkash': '01712345678',
-            'Nagad': '01912345678',
-            'Rocket': '01812345678'
+            'Bkash': siteSettings.bkash_no || 'Not Set',
+            'Nagad': siteSettings.nagad_no || 'Not Set',
+            'Rocket': siteSettings.rocket_no || 'Not Set'
         };
 
         getcoinPaymentSelect.addEventListener('change', () => {
@@ -191,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coinAmountInput && coinPriceDisplay) {
         coinAmountInput.addEventListener('input', () => {
             const amount = parseFloat(coinAmountInput.value) || 0;
-            const totalPrice = amount * 2;
+            const rate = parseFloat(siteSettings.coin_rate) || 2;
+            const totalPrice = amount * rate;
             coinPriceDisplay.textContent = `Total Price: ${totalPrice.toLocaleString()} Taka`;
         });
     }

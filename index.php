@@ -1,6 +1,36 @@
 <?php
 require_once 'includes/config.php';
 include 'includes/header.php';
+
+// Hardcoded defaults (previously from site_settings)
+$s = [
+    'promote_title' => '🚀 Promote Your Video',
+    'promote_video_label' => 'Video Link',
+    'promote_video_placeholder' => 'Enter Your TikTok Video Link...',
+    'getcoin_title' => '💎 Request For Coin',
+    'business_title' => '🏢 Business Partnership Application',
+    'motive_title' => 'Preserving History, One Coin at a Time',
+    'motive_text' => 'At CoinStoreBD, our motive is to bridge the gap between passionate collectors and authentic numismatic treasures. We believe that every coin tells a story of an era, a civilization, or a milestone. Our goal is to provide a secure, transparent, and professional platform where history isn\'t just sold, but celebrated.',
+    'mission_badge' => 'Our Mission',
+    'faq_title' => 'Customer Questions',
+    'faq_q1' => 'How do I know the coins are authenticity?',
+    'faq_a1' => 'Every coin promoted on our platform undergoes a rigorous multi-step verification process by our in-house experts and third-party grading services.',
+    'review_title' => 'Collector Testimonials',
+    'rev1_name' => 'Tanvir Ahmed',
+    'rev1_text' => 'Found an incredibly rare 1912 Sovereign here! The authentication process gave me complete peace of mind. Highly recommended.',
+    'footer_about' => 'CoinStoreBD is Bangladesh\'s leading platform for collectors and investors in authentic numismatic treasures. We connect history with the future.',
+    'footer_copyright' => 'All rights reserved.',
+    'bkash_no' => '01342719542',
+    'nagad_no' => '01342719542',
+    'rocket_no' => '01342719542',
+    'coin_rate' => '2',
+    'rate_views' => '25',
+    'rate_likes' => '5',
+    'rate_followers' => '2'
+];
+
+// Pass settings to JavaScript
+echo "<script>const siteSettings = " . json_encode($s) . ";</script>";
 ?>
 
 <main class="container" id="main-content">
@@ -13,11 +43,11 @@ include 'includes/header.php';
     <!-- Promote Form Section (Visible by default) -->
     <div id="promote-section" style="display: block; max-width: 800px; margin: 0 auto; padding-top: 0rem;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">🚀 Promote Your Video</h3>
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;"><?php echo $s['promote_title']; ?></h3>
             <form id="promoteForm" action="process_promote.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="coin_title">Video Link</label>
-                    <input type="text" id="coin_title" name="coin_title" placeholder="Enter Your Video Link..." required>
+                    <label for="coin_title"><?php echo $s['promote_video_label'] ?? 'Video Link'; ?></label>
+                    <input type="text" id="coin_title" name="coin_title" placeholder="<?php echo $s['promote_video_placeholder'] ?? 'Enter Your Video Link...'; ?>" required>
                 </div>
 
                 <div class="form-group">
@@ -36,7 +66,7 @@ include 'includes/header.php';
                         <button type="button" id="minus-btn" class="stepper-btn">−</button>
                         <button type="button" id="plus-btn" class="stepper-btn">+</button>
                     </div>
-                    <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-color);">Estimated: 1,500 Views</div>
+                    <div id="estimated-result" style="margin-top: 0.5rem; font-weight: bold; color: #334897;">Estimated: 2,500 Views & 500 Likes</div>
                 </div>
 
                 <div class="form-group">
@@ -70,7 +100,7 @@ include 'includes/header.php';
     <!-- GetCoin Section -->
     <div id="getcoin-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💎 Request For Coin</h3>
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;"><?php echo $s['getcoin_title']; ?></h3>
            <form id="getcoinForm" action="process_getcoin.php" method="POST">
                 <div class="form-group">
                     <label for="coin_amount">Coin Amount</label>
@@ -110,7 +140,7 @@ include 'includes/header.php';
     <!-- Business Section -->
     <div id="business-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--secondary-color);">
-            <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;">🏢 Business Partnership Application</h3>
+            <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;"><?php echo $s['business_title']; ?></h3>
             <form action="process_business.php" method="POST">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-group">
@@ -158,11 +188,11 @@ include 'includes/header.php';
 <section class="faq-section">
     <div class="container">
         <div class="faq-content">
-            <h2 class="section-title">Customer Questions</h2>
+            <h2 class="section-title"><?php echo $s['faq_title'] ?? 'Customer Questions'; ?></h2>
             <div class="faq-grid">
                 <div class="faq-item">
-                    <div class="faq-question">How do I know the coins are authentic? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Every coin promoted on our platform undergoes a rigorous multi-step verification process by our in-house experts and third-party grading services.</div>
+                    <div class="faq-question"><?php echo $s['faq_q1']; ?> <span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><?php echo $s['faq_a1']; ?></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">What is the "Promote" feature? <span class="faq-icon">+</span></div>
@@ -185,9 +215,9 @@ include 'includes/header.php';
 <section class="motive-section">
     <div class="container">
         <div class="motive-content">
-            <span class="motive-badge">Our Mission</span>
-            <h2>Preserving History, One Coin at a Time</h2>
-            <p>At CoinStoreBD, our motive is to bridge the gap between passionate collectors and authentic numismatic treasures. We believe that every coin tells a story of an era, a civilization, or a milestone. Our goal is to provide a secure, transparent, and professional platform where history isn't just sold, but celebrated.</p>
+            <span class="motive-badge"><?php echo $s['mission_badge']; ?></span>
+            <h2><?php echo $s['motive_title']; ?></h2>
+            <p><?php echo $s['motive_text']; ?></p>
             <div class="motive-stats">
                 <div class="stat-item">
                     <h4>10k+</h4>
@@ -210,13 +240,13 @@ include 'includes/header.php';
 <section class="reviews-section">
     <div class="container">
         <div class="reviews-content">
-            <h3 class="section-title">Collector Testimonials</h3>
+            <h3 class="section-title"><?php echo $s['review_title'] ?? 'Collector Testimonials'; ?></h3>
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p>"Found a rare 1921 Silver Dollar in pristine condition. The authentication process gave me complete peace of mind. Best in BD!"</p>
+                    <p><?php echo $s['rev1_text']; ?></p>
                     <div class="reviewer">
-                        <strong>Ahmed Tanvir</strong>
+                        <strong><?php echo $s['rev1_name']; ?></strong>
                         <span>Verified Collector</span>
                     </div>
                 </div>
