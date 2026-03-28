@@ -43,6 +43,12 @@ foreach ($allowed_tabs as $tab) {
 }
 
 /**
+ * AUTO-REJECTION LOGIC
+ * If any pending promotion is older than 5 days, move it to rejected
+ */
+$pdo->query("UPDATE promotions SET status = 'rejected' WHERE status = 'pending' AND created_at < NOW() - INTERVAL 5 DAY");
+
+/**
  * AUTO-APPROVAL LOGIC
  * If current tab is 'pending', check for matches in trxids table
  */
@@ -204,16 +210,17 @@ if ($current_tab == 'pending') {
                     <span class="info-label">WhatsApp:</span>
                     <span class="info-value"><?php echo $p['whatsapp']; ?></span>
                 </div>
+                <div class="info-row">
+                    <span class="info-label">Payment:</span>
+                    <span class="info-value"><?php echo $p['payment_option']; ?></span>
+                </div>
                 
                 <div style="background: #f8f9fa; padding: 8px; border-radius: 6px; font-size: 0.8rem; margin-top: 5px;">
                     <strong>Trx ID:</strong> <?php echo htmlspecialchars($p['transaction_id']); ?>
                 </div>
 
                 <div class="card-actions">
-                    <?php if ($p['status'] == 'pending'): ?>
-                        <a href="?action=approve&id=<?php echo $p['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-approve">Approve ✅</a>
-                        <a href="?action=reject&id=<?php echo $p['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-reject">Reject ❌</a>
-                    <?php elseif ($p['status'] == 'approved'): ?>
+                    <?php if ($p['status'] == 'approved'): ?>
                         <a href="?action=complete&id=<?php echo $p['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>

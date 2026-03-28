@@ -43,6 +43,12 @@ foreach ($allowed_tabs as $tab) {
 }
 
 /**
+ * AUTO-REJECTION LOGIC
+ * If any pending request is older than 5 days, move it to rejected
+ */
+$pdo->query("UPDATE coin_requests SET status = 'rejected' WHERE status = 'pending' AND created_at < NOW() - INTERVAL 5 DAY");
+
+/**
  * AUTO-APPROVAL LOGIC
  */
 if ($current_tab == 'pending') {
@@ -190,7 +196,7 @@ if ($current_tab == 'pending') {
                     <span class="info-value"><?php echo $r['whatsapp']; ?></span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Payment:</span>
+                    <span class="info-label">Payment Type:</span>
                     <span class="info-value"><?php echo $r['payment_option']; ?></span>
                 </div>
                 
@@ -200,10 +206,7 @@ if ($current_tab == 'pending') {
                 </div>
 
                 <div class="card-actions">
-                    <?php if ($r['status'] == 'pending'): ?>
-                        <a href="?action=approve&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-approve">Approve ✅</a>
-                        <a href="?action=reject&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-reject">Reject ❌</a>
-                    <?php elseif ($r['status'] == 'approved'): ?>
+                    <?php if ($r['status'] == 'approved'): ?>
                         <a href="?action=complete&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>

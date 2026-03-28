@@ -43,10 +43,10 @@ foreach ($allowed_tabs as $tab) {
 }
 
 /**
- * AUTO-APPROVAL LOGIC
- * Note: Business apps normally require manual review, but if they have a transaction 
- * mechanism, we can add it here. For now, following the same pattern as others.
+ * AUTO-REJECTION LOGIC
+ * If any pending application is older than 5 days, move it to rejected
  */
+$pdo->query("UPDATE business_apps SET status = 'rejected' WHERE status = 'pending' AND created_at < NOW() - INTERVAL 5 DAY");
 ?>
 
 <!DOCTYPE html>
@@ -185,10 +185,7 @@ foreach ($allowed_tabs as $tab) {
                 </div>
 
                 <div class="card-actions">
-                    <?php if ($a['status'] == 'pending'): ?>
-                        <a href="?action=approve&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-approve">Approve ✅</a>
-                        <a href="?action=reject&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-reject">Reject ❌</a>
-                    <?php elseif ($a['status'] == 'approved'): ?>
+                    <?php if ($a['status'] == 'approved'): ?>
                         <a href="?action=complete&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>

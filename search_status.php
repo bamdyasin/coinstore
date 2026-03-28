@@ -8,7 +8,7 @@ if (isset($_GET['trxid']) && !empty($_GET['trxid'])) {
     $type = "";
 
     // 1. Check in promotions table
-    $stmt = $pdo->prepare("SELECT id, status, created_at, category, budget FROM promotions WHERE transaction_id = ? LIMIT 1");
+    $stmt = $pdo->prepare("SELECT id, status, created_at, category, budget, payment_option FROM promotions WHERE transaction_id = ? LIMIT 1");
     $stmt->execute([$trxid]);
     $promo = $stmt->fetch();
 
@@ -18,7 +18,7 @@ if (isset($_GET['trxid']) && !empty($_GET['trxid'])) {
         $result = $promo;
     } else {
         // 2. Check in coin_requests table
-        $stmt = $pdo->prepare("SELECT id, status, created_at, coin_amount, total_price FROM coin_requests WHERE transaction_id = ? LIMIT 1");
+        $stmt = $pdo->prepare("SELECT id, status, created_at, coin_amount, total_price, payment_option FROM coin_requests WHERE transaction_id = ? LIMIT 1");
         $stmt->execute([$trxid]);
         $coin = $stmt->fetch();
 
@@ -48,6 +48,10 @@ if (isset($_GET['trxid']) && !empty($_GET['trxid'])) {
                     <div class='status-row'>
                         <span>Date:</span>
                         <strong>$date</strong>
+                    </div>
+                    <div class='status-row'>
+                        <span>Payment Type:</span>
+                        <strong>{$result['payment_option']}</strong>
                     </div>";
 
         if ($type == "Promotion Request") {
