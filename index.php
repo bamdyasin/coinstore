@@ -168,8 +168,13 @@ include 'includes/header.php';
             <h2 class="section-title">Customer Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">
-                    <div class="faq-question">How do I know the coins are authenticity? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Every coin promoted on our platform undergoes a rigorous multi-step verification process by our in-house experts and third-party grading services.</div>
+                    <div class="faq-question">প্রশ্ন: প্রমোট (Promote) অপশন কাদের জন্য? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">উত্তর:
+প্রমোট অপশনটি মূলত তাদের জন্য, যারা ভিডিও প্রমোশন বা অনলাইনে ভিডিও বুস্ট করার বিষয়ে অভিজ্ঞ নন, অথবা এ বিষয়ে বিস্তারিত জানেন না। <br>
+
+আপনাকে শুধু আপনার ভিডিওর লিংক এবং কত বাজেটে কতটি ভিডিও প্রমোট করতে চান তা জানাতে হবে। এরপর বাকি সমস্ত কাজ আমরা সততা, দক্ষতা এবং আন্তরিকতার সাথে সম্পন্ন করব। <br>
+
+আমাদের লক্ষ্য হচ্ছে আপনার কনটেন্টকে সঠিকভাবে অডিয়েন্সের কাছে পৌঁছে দেওয়া, যাতে আপনি সহজেই ভালো ফলাফল পেতে পারেন।</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">What is the "Promote" feature? <span class="faq-icon">+</span></div>
