@@ -24,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare("INSERT INTO coin_requests (coin_amount, total_price, whatsapp, payment_option, transaction_id) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$coin_amount, $total_price, $whatsapp, $payment_option, $transaction_id]);
         
-        echo "<script>alert('Coin request submitted successfully!'); window.location.href='index.php';</script>";
+        header("Location: index.php?success=1&title=Request Sent!&message=Your coin request has been submitted successfully. Please wait for admin approval.");
+        exit();
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }

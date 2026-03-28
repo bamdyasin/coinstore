@@ -25,7 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare("INSERT INTO promotions (video_link, category, budget, whatsapp, payment_option, transaction_id) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$video_link, $category, $budget, $whatsapp, $payment_option, $transaction_id]);
         
-        echo "<script>alert('Promotion request submitted successfully!'); window.location.href='index.php';</script>";
+        header("Location: index.php?success=1&title=Submitted!&message=Your promotion request has been received and is now under review. We will contact you soon.");
+        exit();
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }

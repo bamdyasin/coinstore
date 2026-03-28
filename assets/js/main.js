@@ -1,5 +1,59 @@
 // Main JavaScript for CoinStoreBD
+
+// Success Modal Functions
+window.showSuccessModal = (message, title = 'Success!') => {
+    const modal = document.getElementById('successModal');
+    const msgEl = document.getElementById('successMessage');
+    const titleEl = document.getElementById('successTitle');
+    
+    if (modal && msgEl && titleEl) {
+        titleEl.textContent = title;
+        msgEl.textContent = message;
+        modal.style.display = 'block';
+    }
+};
+
+window.showErrorModal = (message, title = 'Validation Error') => {
+    const statusResult = document.getElementById('statusResult');
+    const statusModal = document.getElementById('statusModal');
+    if (statusResult && statusModal) {
+        statusResult.innerHTML = `
+            <div class="status-error" style="text-align: center; padding: 1rem;">
+                <div style="width: 60px; height: 60px; background: #ffebee; color: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.5rem; border: 3px solid #e74c3c; animation: shake 0.5s ease-in-out;">
+                    ✕
+                </div>
+                <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">${title}</h3>
+                <p style="color: #666; line-height: 1.5;">${message}</p>
+                <button onclick="document.getElementById('statusModal').style.display='none'" class="btn" style="margin-top: 1.5rem; width: 100%; background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 0.8rem;">Try Again</button>
+            </div>`;
+        statusModal.style.display = 'block';
+    } else {
+        alert(message);
+    }
+};
+
+window.closeSuccessModal = () => {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Clean up URL
+        const url = new URL(window.location);
+        url.searchParams.delete('success');
+        url.searchParams.delete('message');
+        url.searchParams.delete('title');
+        window.history.replaceState({}, document.title, url.pathname);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Check for success message in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        const msg = urlParams.get('message') || 'Action completed successfully!';
+        const title = urlParams.get('title') || 'Success!';
+        showSuccessModal(msg, title);
+    }
+    
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -93,15 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let displayValue = '';
 
             if (type === 'VideoViews') {
-                const views = Math.floor(budget * (parseFloat(siteSettings.rate_views) || 25));
-                const likes = Math.floor(budget * (parseFloat(siteSettings.rate_likes) || 5));
+                const views = Math.floor(budget * 25);
+                const likes = Math.floor(budget * 5);
                 displayValue = `Estimated: ${views.toLocaleString()} Views & ${likes.toLocaleString()} Likes`;
             } else if (type === 'LikeComments') {
                 const views = Math.floor(budget * 20);
                 const likes = Math.floor(budget * 6);
                 displayValue = `Estimated: ${views.toLocaleString()} Views & ${likes.toLocaleString()} Likes & Comments`;
             } else if (type === 'Followers') {
-                const followers = Math.floor(budget * (parseFloat(siteSettings.rate_followers) || 2));
+                const followers = Math.floor(budget * 2);
                 const views = Math.floor(budget * 20);
                 displayValue = `Estimated: ${views.toLocaleString()} Views & ${followers.toLocaleString()} Followers`;
             }
@@ -169,9 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (getcoinPaymentSelect && getcoinAgentDisplay && getcoinAgentNumber && getcoinPaymentMethodName) {
         const agentNumbers = {
-            'Bkash': siteSettings.bkash_no || 'Not Set',
-            'Nagad': siteSettings.nagad_no || 'Not Set',
-            'Rocket': siteSettings.rocket_no || 'Not Set'
+            'Bkash': '01342719542',
+            'Nagad': '01342719542',
+            'Rocket': '01342719542'
         };
 
         getcoinPaymentSelect.addEventListener('change', () => {
@@ -193,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coinAmountInput && coinPriceDisplay) {
         coinAmountInput.addEventListener('input', () => {
             const amount = parseFloat(coinAmountInput.value) || 0;
-            const rate = parseFloat(siteSettings.coin_rate) || 2;
+            const rate = 2;
             const totalPrice = amount * rate;
             coinPriceDisplay.textContent = `Total Price: ${totalPrice.toLocaleString()} Taka`;
         });
@@ -252,25 +306,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form Submission Duplicate Check
+    // Form Submission Duplicate & Validation Check
     const promoteForm = document.getElementById('promoteForm');
     const getcoinForm = document.getElementById('getcoinForm');
+
+    const validateForm = (formId) => {
+        const form = document.getElementById(formId);
+        if (!form) return true;
+
+        let isValid = true;
+        let errorMessage = "";
+
+        // 1. WhatsApp Validation (11 digits)
+        const whatsappInput = form.querySelector('input[name="whatsapp"]');
+        if (whatsappInput) {
+            const val = whatsappInput.value.trim();
+            if (val.length < 11 || !/^\+?\d+$/.test(val)) {
+                isValid = false;
+                errorMessage = "WhatsApp number must be at least 11 digits.";
+            }
+        }
+
+        // 2. TrxID Validation (10-15 chars)
+        const trxInput = form.querySelector('textarea[name="description"]');
+        if (trxInput) {
+            const val = trxInput.value.trim();
+            if (val.length < 10 || val.length > 15) {
+                isValid = false;
+                errorMessage = "Transaction ID must be between 10 to 15 characters.";
+            }
+        }
+
+        // 3. Link Validation (for Promote form)
+        if (formId === 'promoteForm') {
+            const linkInput = document.getElementById('coin_title');
+            if (linkInput) {
+                const val = linkInput.value.trim();
+                const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+                if (!urlRegex.test(val)) {
+                    isValid = false;
+                    errorMessage = "Please enter a valid video link/URL.";
+                }
+            }
+        }
+
+        if (!isValid) {
+            showErrorModal(errorMessage);
+        }
+        return isValid;
+    };
 
     const checkAndSubmit = (form, trxInputId) => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // First run our new validations
+            if (!validateForm(form.id)) return;
+
             const trxid = document.getElementById(trxInputId).value.trim();
 
             fetch(`check_duplicate_trxid.php?trxid=${encodeURIComponent(trxid)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.duplicate) {
-                        // Show Error Popup
-                        statusResult.innerHTML = `<div class="status-error">
-                            <h3 style="color:#e74c3c;">Duplicate TrxID</h3>
-                            <p>Error: This Transaction ID has already been used. Please provide a unique TrxID.</p>
-                        </div>`;
-                        statusModal.style.display = 'block';
+                        showErrorModal("This Transaction ID has already been used. Please provide a unique TrxID.", "Duplicate TrxID");
                     } else {
                         // Unique, proceed with normal submission
                         form.submit();

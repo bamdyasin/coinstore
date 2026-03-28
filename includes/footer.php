@@ -2,7 +2,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>CoinStoreBD</h3>
-                <p><?php echo $s['footer_about'] ?? 'Your trusted source for authentic rare and collectible coins in Bangladesh.'; ?></p>
+                <p>CoinStoreBD is Bangladesh's leading platform for collectors and investors in authentic numismatic treasures. We connect history with the future.</p>
             </div>
             
 
@@ -30,7 +30,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p><?php echo $s['footer_copyright'] ?? '&copy; ' . date('Y') . ' CoinStoreBD. All rights reserved.'; ?></p>
+            <p>All rights reserved.</p>
         </div>
     </footer>
     <!-- Order Status Modal -->
@@ -42,6 +42,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Success Notification Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content" style="text-align: center; padding: 3rem 2rem;">
+            <div style="margin-bottom: 1.5rem;">
+                <div style="width: 80px; height: 80px; background: #e8f5e9; color: #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto; border: 4px solid #2ecc71; animation: scaleUp 0.5s ease-out;">
+                    ✓
+                </div>
+            </div>
+            <h2 id="successTitle" style="color: var(--secondary-color); margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Success!</h2>
+            <p id="successMessage" style="color: #666; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5;"></p>
+            <button onclick="closeSuccessModal()" class="btn btn-primary" style="width: 100%;">Continue</button>
+        </div>
+    </div>
+
+    <style>
+    @keyframes scaleUp {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    </style>
 
     <script src="assets/js/main.js"></script>
 </body>

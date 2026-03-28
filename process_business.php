@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare("INSERT INTO business_apps (biz_name, contact_person, biz_type, experience, website, message) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$biz_name, $contact_person, $biz_type, $experience, $website, $message]);
         
-        echo "<script>alert('Business application submitted successfully!'); window.location.href='index.php';</script>";
+        header("Location: index.php?success=1&title=Application Received!&message=Thank you for your interest. Our team will review your business application and contact you soon.");
+        exit();
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
