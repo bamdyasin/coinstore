@@ -9,7 +9,7 @@ include 'includes/header.php';
         <h2>Welcome to CoinStoreBD</h2>
         <p>Select a tab above to get started.</p>
     </div>
-
+            <h3 style="color: #2e1e53; margin-bottom: 1.5rem; text-align: center;">ভাইরাল হোন নিজের স্টাইলে। 🚀</h3>
     <!-- Promote Form Section (Visible by default) -->
     <div id="promote-section" style="display: block; max-width: 800px; margin: 0 auto; padding-top: 0rem;">
         <div class="form-card" style="border-top: 5px solid var(--primary-color);">
@@ -168,55 +168,28 @@ include 'includes/header.php';
             <h2 class="section-title">Customer Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">
-                    <div class="faq-question">প্রশ্ন: প্রমোট (Promote) অপশন কাদের জন্য? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">উত্তর:
-প্রমোট অপশনটি মূলত তাদের জন্য, যারা ভিডিও প্রমোশন বা অনলাইনে ভিডিও বুস্ট করার বিষয়ে অভিজ্ঞ নন, অথবা এ বিষয়ে বিস্তারিত জানেন না। <br>
-
-আপনাকে শুধু আপনার ভিডিওর লিংক এবং কত বাজেটে কতটি ভিডিও প্রমোট করতে চান তা জানাতে হবে। এরপর বাকি সমস্ত কাজ আমরা সততা, দক্ষতা এবং আন্তরিকতার সাথে সম্পন্ন করব। <br>
-
-আমাদের লক্ষ্য হচ্ছে আপনার কনটেন্টকে সঠিকভাবে অডিয়েন্সের কাছে পৌঁছে দেওয়া, যাতে আপনি সহজেই ভালো ফলাফল পেতে পারেন।</div>
+                    <div class="faq-question">প্রশ্ন: (Promote) অপশন কাদের জন্য? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">উত্তর: যারা ভিডিও বুস্ট করার বিষয়ে কিছুই জানেন না (Promote) অপশন তাদের জন্য। আপনি পেমেন্ট করার পর আপনার ভিডিও লিংক ও পেমেন্ট ইনফো সাবমিট করবেন এরপর বাকি সমস্ত কাজ আমরা সততা, দক্ষতা এবং আন্তরিকতার সাথে সম্পন্ন করব।</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">What is the "Promote" feature? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">The Promote feature allows collectors to showcase their rare items on the homepage or at the top of search results to reach thousands of potential buyers.</div>
+                    <div class="faq-question">প্রশ্ন: (GetCoin) অপশন কাদের জন্য? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">যারা নিজের ভিডিও নিজেই বুস্ট করতে পারেন বা শুধুমাত্র কয়েন নিতে চান তাদের জন্য GETCOIN অপসন। </div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Is shipping secure across Bangladesh? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Yes, we use insured, high-security logistics partners to ensure your valuable coins reach you discreetly and safely anywhere in Bangladesh.</div>
+                    <div class="faq-question">প্রশ্ন: (Business) অপশন কাদের জন্য? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">যারা অনলাইনে বিসনেস করতে চান তারা চাইলে (Business) অপসন থেকে প্রোডাক্ট সেল, কনসালটেন্সি, অনলাইন বিসনেস মেনেজমেন্ট ইত্যাদি সার্ভিসেস নিতে পারেন। </div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">How can I become a business partner? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Simply fill out the form in the "Business" tab. Our team will review your application and contact you within 48 hours for onboarding.</div>
+                    <div class="faq-question">প্রশ্ন: আমাদের থেকে কেন সার্ভিস নিবেন? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">আমরা সততা, দক্ষতা এবং আন্তরিকতার সাথে গ্রাহকের দেয়া কাজ সঠিক সময়ে সম্পন্ন করে থাকি। তাই ১০০% নিশ্চিন্তে ও নিরাপদে আপনি আমাদের থেকে সার্ভিস নিতে পারেন। </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Our Motive Section -->
-<section class="motive-section">
-    <div class="container">
-        <div class="motive-content">
-            <span class="motive-badge">Our Mission</span>
-            <h2>Preserving History, One Coin at a Time</h2>
-            <p>At CoinStoreBD, our motive is to bridge the gap between passionate collectors and authentic numismatic treasures. We believe that every coin tells a story of an era, a civilization, or a milestone. Our goal is to provide a secure, transparent, and professional platform where history isn't just sold, but celebrated.</p>
-            <div class="motive-stats">
-                <div class="stat-item">
-                    <h4>10k+</h4>
-                    <p>Authentic Coins</p>
-                </div>
-                <div class="stat-item">
-                    <h4>5k+</h4>
-                    <p>Happy Collectors</p>
-                </div>
-                <div class="stat-item">
-                    <h4>100%</h4>
-                    <p>Secure Escrow</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- FAQ Section End -->
+
 
 <!-- Reviews Section -->
 <section class="reviews-section">
@@ -226,26 +199,27 @@ include 'includes/header.php';
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p>Found an incredibly rare 1912 Sovereign here! The authentication process gave me complete peace of mind. Highly recommended.</p>
+                    <p>আলহামদুলিল্লাহ, <br>
+তাদের সার্ভিস অনেক ভালো। আমি তাদের থেকে একাধিক বার সার্ভিস নিয়েছি।  <br>Highly recommended.</p>
                     <div class="reviewer">
                         <strong>Tanvir Ahmed</strong>
-                        <span>Verified Collector</span>
+                        <span>Promote Customer</span>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p>"The business partnership has been a game-changer for my local shop. Their inventory management tools are top-notch."</p>
+                    <p>ওনাদের সার্ভিস অনেক ভালো <br>৫ মিনিটের মধ্যে coin দিয়ে দেয়। আপনারা চাইলে ওনাদের থেকে কয়েন নিতে পারেন। <br>সার্ভিস ভালো পাবেন আশাকরি। </p>
                     <div class="reviewer">
                         <strong>Rahat Kabir</strong>
-                        <span>Dealer Partner</span>
+                        <span>Coin Collector</span>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="stars">★★★★☆</div>
-                    <p>"Great customer support. They helped me find a specific ancient Roman coin I've been looking for for years."</p>
+                    <p>"অনেক ভালো business রিলিটেড সাপোর্ট দিয়ে থাকে। <br>খুঁটিনাটি ও সিক্রেট বিষয়ে সহজ ভাবে আলোচনা করে. Android App  থেকে শুরু করে ওয়েব ডিজাইন, ডেভেলপমেন্ট ও ডিজিটাল মার্কেটিং বিষয়ে ওনাদের টিম পারদর্শী। <br>আমি ১০০% রিকোমেন্ড করি। </p>
                     <div class="reviewer">
                         <strong>Sultana Kamal</strong>
-                        <span>Hobbyist</span>
+                        <span>Consultancy holder</span>
                     </div>
                 </div>
             </div>

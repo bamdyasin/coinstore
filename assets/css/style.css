@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
 :root {
     --primary-color: #ffd700;
     --primary-gradient: linear-gradient(135deg, #ffd700, #daa520);
@@ -17,7 +19,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Hind Siliguri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color);
     background-color: var(--bg-light);
     line-height: 1.6;
@@ -110,8 +112,7 @@ header {
     background-color: transparent;
     position: sticky;
     top: 70px;
-    z-index: 998;
-    padding: 1rem 0;
+    z-index: 998; 
 }
 
 .tabs-container {
@@ -330,50 +331,11 @@ header {
     color: #666;
 }
 
-/* Motive Section Styles */
-.motive-section {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-.motive-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.motive-badge {
-    color: var(--primary-color);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
-.motive-content h2 {
-    font-size: 2.5rem;
-    margin: 1rem 0 2rem;
-    font-family: 'Playfair Display', serif;
-}
-
-.motive-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    opacity: 0.8;
-    margin-bottom: 3rem;
-}
-
-.motive-stats {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
+/* FAQ & Reviews Alignment */
 
 /* FAQ & Reviews Alignment with Motive Section */
 .faq-section, .reviews-section {
-    padding: 1rem 0;
-    text-align: center;
+    padding: 1rem 0; 
 }
 
 .faq-content, .reviews-content {
@@ -460,9 +422,9 @@ header {
     padding: 0 2rem;
     max-height: 0;
     overflow: hidden;
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.8;
     transition: all 0.3s ease-out;
 }
 
@@ -472,7 +434,7 @@ header {
 
 .faq-item.active .faq-answer {
     padding-bottom: 1.5rem;
-    max-height: 200px; /* Adjust as needed */
+    max-height: 300px; /* Adjust as needed */
 }
 
 .faq-item.active .faq-icon {
@@ -589,7 +551,7 @@ nav ul li a.active {
 }
 
 .tabs-bar {
-    top: 60px; /* Adjusted for smaller mobile header height if needed */
+    top: 82px; /* Adjusted for smaller mobile header height if needed */
 }
 
 /* Footer Styles */
@@ -670,7 +632,7 @@ footer {
     background: var(--primary-gradient);
     border-color: transparent;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 5px 15px #ffd70033;
 }
 
 .contact-item span:not(.contact-icon) {
