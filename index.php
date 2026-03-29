@@ -69,7 +69,7 @@ include 'includes/header.php';
                     <textarea id="promote_trxid" name="description" rows="1" placeholder="Enter TrxID Here" required></textarea>
                 </div>
  
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">🚀 Submit for Review</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">🚀 Submit Boost Order</button>
             </form>
         </div>
     </div>
@@ -109,7 +109,7 @@ include 'includes/header.php';
                 </div>
  
 
-                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Send Request</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Send Coin Order</button>
             </form>
         </div>
     </div>
@@ -117,7 +117,7 @@ include 'includes/header.php';
     <!-- Business Section -->
     <div id="business-section" style="display: none; max-width: 800px; margin: 0 auto;">
         <div class="form-card" style="border-top: 5px solid var(--secondary-color);">
-            <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;">🏢 Business Partnership Application</h3>
+            <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;">🏢 Business Service Application</h3>
             <form action="process_business.php" method="POST">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-group">
@@ -131,12 +131,12 @@ include 'includes/header.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="biz_type">Business Type</label>
+                    <label for="biz_type">Service Type</label>
                     <select id="biz_type" name="biz_type">
-                        <option value="dealer">Professional Dealer</option>
-                        <option value="collector">Private Collector / Investor</option>
-                        <option value="auction">Auction House</option>
-                        <option value="jewelry">Jewelry Shop</option>
+                        <option value="dealer">Digital Marketing </option>
+                        <option value="collector">App or Website Development</option>
+                        <option value="auction">Social Media Management</option>
+                        <option value="jewelry">Video Production</option>
                     </select>
                 </div>
 
@@ -151,7 +151,7 @@ include 'includes/header.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Why do you want to partner with us?</label>
+                    <label for="message">Why do you want to Discuss with us?</label>
                     <textarea id="message" name="message" rows="3" placeholder="Tell us about your business goals..."></textarea>
                 </div>
 

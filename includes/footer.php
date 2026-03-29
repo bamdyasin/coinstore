@@ -2,7 +2,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>CoinStoreBD</h3>
-                <p>CoinStoreBD is Bangladesh's leading platform for collectors and investors in authentic numismatic treasures. We connect history with the future.</p>
+                <p>ভাইরাল হোন নিজের স্টাইলে। 🚀 <br>
+আমরা সততা, দক্ষতা এবং আন্তরিকতার একমাত্র প্রতীক আমাদের এই কয়েন স্টোর।  সঠিক সময়ে  ১০০% নিশ্চিন্তে ও নিরাপদে সার্ভিস নিন। 🚀</p>
             </div>
             
 
