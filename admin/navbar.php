@@ -22,6 +22,7 @@
             <li><a href="coin_requests.php">Coin Requests</a></li>
             <li><a href="business.php">Business Apps</a></li>
             <li><a href="trxids.php">TrxIDs</a></li>
+            <li><a href="settings.php">Settings</a></li>
             <li><a href="logout.php" class="logout-link">Logout</a></li>
         </ul>
     </nav>
