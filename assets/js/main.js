@@ -118,6 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Auto-switch tab based on URL parameter
+    const activeTabParam = urlParams.get('tab');
+    if (activeTabParam && sections[activeTabParam]) {
+        const targetTabItem = document.querySelector(`.tab-item[data-tab="${activeTabParam}"]`);
+        if (targetTabItem) targetTabItem.click();
+    }
+
     // FAQ Accordion Logic
     const faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(q => {
@@ -198,9 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (paymentSelect && agentDisplay && agentNumber && paymentMethodName) {
         const agentNumbers = {
-            'Bkash': '01342719542',
-            'Nagad': '01342719542',
-            'Rocket': '01342719542'
+            'Bkash': '01845464034',
+            'Nagad': '01845464034',
+            'Rocket': '01845464034'
         };
 
         paymentSelect.addEventListener('change', () => {
@@ -223,9 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (getcoinPaymentSelect && getcoinAgentDisplay && getcoinAgentNumber && getcoinPaymentMethodName) {
         const agentNumbers = {
-            'Bkash': '01342719542',
-            'Nagad': '01342719542',
-            'Rocket': '01342719542'
+            'Bkash': '01845464034',
+            'Nagad': '01845464034',
+            'Rocket': '01845464034'
         };
 
         getcoinPaymentSelect.addEventListener('change', () => {
@@ -279,6 +286,71 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     if (data.success) {
                         statusResult.innerHTML = data.html;
+
+                        // Logic for Timer and WhatsApp Button
+                        if (data.status === 'pending' || data.status === 'rejected') {
+                            const createdAt = new Date(data.created_at).getTime();
+                            const now = new Date().getTime();
+                            const diffMinutes = Math.floor((now - createdAt) / 1000 / 60);
+
+                            if (data.status === 'pending' && diffMinutes < 10) {
+                                // Show Timer
+                                const remainingMs = (10 * 60 * 1000) - (now - createdAt);
+                                const timerContainer = document.createElement('div');
+                                timerContainer.style.textAlign = 'center';
+                                timerContainer.style.marginTop = '1rem';
+                                timerContainer.style.padding = '10px';
+                                timerContainer.style.background = '#fff8e1';
+                                timerContainer.style.borderRadius = '8px';
+                                timerContainer.style.border = '1px solid #ffe082';
+                                
+                                let timeLeft = Math.floor(remainingMs / 1000);
+                                
+                                const updateTimerDisplay = () => {
+                                    const mins = Math.floor(timeLeft / 60);
+                                    const secs = timeLeft % 60;
+                                    timerContainer.innerHTML = `
+                                        <div style="font-size: 0.85rem; color: #f39c12; font-weight: bold; margin-bottom: 5px;">অর্ডার প্রসেসিং হচ্ছে...</div>
+                                        <div style="font-size: 1.2rem; font-weight: bold; color: #d35400;">${mins}:${secs < 10 ? '0' : ''}${secs} অপেক্ষা করুন।</div>
+                                    `;
+                                };
+                                
+                                updateTimerDisplay();
+                                statusResult.appendChild(timerContainer);
+                                
+                                const timerInterval = setInterval(() => {
+                                    timeLeft--;
+                                    if (timeLeft <= 0) {
+                                        clearInterval(timerInterval);
+                                        // Once timer ends, we could add the WhatsApp button
+                                        location.reload(); // Simple refresh to update status
+                                    } else {
+                                        updateTimerDisplay();
+                                    }
+                                }, 1000);
+
+                                // Clear interval when modal closes
+                                const closeBtn = document.querySelector('.close-modal');
+                                closeBtn.addEventListener('click', () => clearInterval(timerInterval));
+                                window.addEventListener('click', (e) => {
+                                    if (e.target === statusModal) clearInterval(timerInterval);
+                                });
+
+                            } else if (data.status === 'rejected' || (data.status === 'pending' && diffMinutes >= 10)) {
+                                // Show WhatsApp Support Button
+                                const whatsappBtn = document.createElement('a'); 
+                                whatsappBtn.href = "https://wa.me/8801845464034?text=" + encodeURIComponent("হাই, আমার অর্ডার " + data.status + " কেন? TrxID: " + trxid + " দয়া করে দেখন!");
+                                whatsappBtn.target = "_blank";
+                                whatsappBtn.className = "btn";
+                                whatsappBtn.style.width = "100%";
+                                whatsappBtn.style.marginTop = "1rem";
+                                whatsappBtn.style.background = "#25D366";
+                                whatsappBtn.style.color = "white";
+                                whatsappBtn.style.border = "none";
+                                whatsappBtn.innerHTML = "Support (WhatsApp)";
+                                statusResult.appendChild(whatsappBtn);
+                            }
+                        }
                     } else {
                         statusResult.innerHTML = `<div class="status-error">
                             <h3>Not Found</h3>
@@ -342,10 +414,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const linkInput = document.getElementById('coin_title');
             if (linkInput) {
                 const val = linkInput.value.trim();
-                const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+                // Improved regex to support TikTok desktop, mobile, and URLs with parameters
+                const urlRegex = /^(https?:\/\/)?(www\.|vm\.|vt\.|t\.)?tiktok\.com\/.*$/i;
                 if (!urlRegex.test(val)) {
                     isValid = false;
-                    errorMessage = "Please enter a valid video link/URL.";
+                    errorMessage = "Please enter a valid TikTok video link.";
                 }
             }
         }

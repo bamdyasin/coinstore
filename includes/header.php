@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoinStoreBD - Premium Rare Coins</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -30,12 +32,14 @@
         </div>
         <nav id="nav-menu">
             <ul>
-                <li><a href="index.php" class="active">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="cart.php" class="btn">Cart (0)</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php?tab=promote">Promote</a></li>
+                <li><a href="index.php?tab=getcoin">GetCoin</a></li>
+                <li><a href="index.php?tab=business">Business</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="privacy.php">Privacy</a></li>
+                <li><a href="https://wa.me/8801845464034" target="_blank" class="btn" style="background: #25D366; color: white !important; border: none;"><i class="fab fa-whatsapp"></i> Support</a></li>
             </ul>
         </nav>
     </header>

@@ -83,7 +83,7 @@ if (isset($_GET['trxid']) && !empty($_GET['trxid'])) {
                 </div>
             </div>";
 
-        echo json_encode(['success' => true, 'html' => $html]);
+        echo json_encode(['success' => true, 'html' => $html, 'status' => $result['status'], 'created_at' => $result['created_at']]);
     } else {
         echo json_encode(['success' => false, 'message' => 'No order found with this Transaction ID.']);
     }

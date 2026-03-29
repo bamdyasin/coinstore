@@ -54,15 +54,16 @@ $pdo->query("UPDATE promotions SET status = 'rejected' WHERE status = 'pending' 
  */
 if ($current_tab == 'pending') {
     // Select all pending promotions
-    $pending_promos = $pdo->query("SELECT id, transaction_id, budget FROM promotions WHERE status = 'pending'")->fetchAll();
+    $pending_promos = $pdo->query("SELECT id, transaction_id, budget, payment_option FROM promotions WHERE status = 'pending'")->fetchAll();
     
     foreach ($pending_promos as $promo) {
         $trxid = $promo['transaction_id'];
         $budget = $promo['budget'];
+        $method = $promo['payment_option'];
         
-        // Check if this TrxID exists in trxids table with same amount and is 'unused'
-        $stmt_check = $pdo->prepare("SELECT id FROM trxids WHERE transaction_id = ? AND amount = ? AND status = 'unused' LIMIT 1");
-        $stmt_check->execute([$trxid, $budget]);
+        // Check if this TrxID exists in trxids table with same amount, same method and is 'unused'
+        $stmt_check = $pdo->prepare("SELECT id FROM trxids WHERE transaction_id = ? AND amount = ? AND payment_method = ? AND status = 'unused' LIMIT 1");
+        $stmt_check->execute([$trxid, $budget, $method]);
         $match = $stmt_check->fetch();
         
         if ($match) {

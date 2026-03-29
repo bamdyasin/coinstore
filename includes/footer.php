@@ -11,21 +11,21 @@
                 <h3>Connect With Us</h3>
                 <div class="footer-social-row">
                     <!-- Contact Icons -->
-                    <div class="contact-item" title="Our Location">
-                        <span class="contact-icon">📍</span>
-                    </div>
-                    <div class="contact-item" title="Call Us">
-                        <span class="contact-icon">📞</span>
-                    </div>
-                    <div class="contact-item" title="Email Us">
-                        <span class="contact-icon">📧</span>
-                    </div>
-                    <div class="contact-item" title="Call Us">
-                        <span class="contact-icon">📞</span>
-                    </div>
-                    <div class="contact-item" title="Email Us">
-                        <span class="contact-icon">📧</span>
-                    </div>
+                    <a href="https://maps.google.com" target="_blank" class="contact-item" title="Our Location">
+                        <span class="contact-icon"><i class="fas fa-location-dot"></i></span>
+                    </a>
+                    <a href="https://www.tiktok.com/@coinstorebd" target="_blank" class="contact-item" title="TikTok">
+                        <span class="contact-icon"><i class="fab fa-tiktok"></i></span>
+                    </a>
+                    <a href="https://www.facebook.com/coinstorebd" target="_blank" class="contact-item" title="Facebook">
+                        <span class="contact-icon"><i class="fab fa-facebook-f"></i></span>
+                    </a>
+                    <a href="https://wa.me/8801845464034" target="_blank" class="contact-item" title="WhatsApp">
+                        <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
+                    </a>
+                    <a href="https://www.youtube.com/@coinstorebd" target="_blank" class="contact-item" title="YouTube">
+                        <span class="contact-icon"><i class="fab fa-youtube"></i></span>
+                    </a>
                 </div>
             </div>
         </div>

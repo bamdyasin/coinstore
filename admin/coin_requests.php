@@ -52,13 +52,14 @@ $pdo->query("UPDATE coin_requests SET status = 'rejected' WHERE status = 'pendin
  * AUTO-APPROVAL LOGIC
  */
 if ($current_tab == 'pending') {
-    $pending_requests = $pdo->query("SELECT id, transaction_id, total_price FROM coin_requests WHERE status = 'pending'")->fetchAll();
+    $pending_requests = $pdo->query("SELECT id, transaction_id, total_price, payment_option FROM coin_requests WHERE status = 'pending'")->fetchAll();
     foreach ($pending_requests as $req) {
         $trxid = $req['transaction_id'];
         $amount = $req['total_price'];
+        $method = $req['payment_option'];
         
-        $stmt_check = $pdo->prepare("SELECT id FROM trxids WHERE transaction_id = ? AND amount = ? AND status = 'unused' LIMIT 1");
-        $stmt_check->execute([$trxid, $amount]);
+        $stmt_check = $pdo->prepare("SELECT id FROM trxids WHERE transaction_id = ? AND amount = ? AND payment_method = ? AND status = 'unused' LIMIT 1");
+        $stmt_check->execute([$trxid, $amount, $method]);
         $match = $stmt_check->fetch();
         
         if ($match) {
