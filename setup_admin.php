@@ -8,7 +8,7 @@ if (!isset($_GET['key']) || $_GET['key'] !== $secret_key) {
 }
 
 try {
-    // 1. Create tables for form submissions and users
+    // 1. Create tables
     $sql = "
     CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,17 +19,7 @@ try {
         role ENUM('admin', 'user') DEFAULT 'user',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-    ";
-    $pdo->exec($sql);
 
-    // Check if 'password' column exists in 'users' table (for existing installations)
-    $columns = $pdo->query("SHOW COLUMNS FROM users LIKE 'password'")->fetchAll();
-    if (empty($columns)) {
-        $pdo->exec("ALTER TABLE users ADD COLUMN password VARCHAR(255) NOT NULL AFTER email");
-        echo "Added missing 'password' column to users table.<br>";
-    }
-
-    $sql_others = "
     CREATE TABLE IF NOT EXISTS promotions (
         id INT AUTO_INCREMENT PRIMARY KEY,
         video_link VARCHAR(255) NOT NULL,
@@ -38,7 +28,7 @@ try {
         whatsapp VARCHAR(20) NOT NULL,
         payment_option VARCHAR(50) NOT NULL,
         transaction_id VARCHAR(100) NOT NULL,
-        status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+        status ENUM('pending', 'approved', 'completed', 'rejected') DEFAULT 'pending',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -49,7 +39,7 @@ try {
         whatsapp VARCHAR(20) NOT NULL,
         payment_option VARCHAR(50) NOT NULL,
         transaction_id VARCHAR(100) NOT NULL,
-        status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+        status ENUM('pending', 'approved', 'completed', 'rejected') DEFAULT 'pending',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -61,13 +51,32 @@ try {
         experience INT NOT NULL,
         website VARCHAR(255),
         message TEXT,
-        status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+        status ENUM('pending', 'approved', 'completed', 'rejected') DEFAULT 'pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS site_settings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        setting_key VARCHAR(100) NOT NULL UNIQUE,
+        setting_value TEXT,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS trxids (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        transaction_id VARCHAR(100) NOT NULL UNIQUE,
+        payment_method VARCHAR(50) NOT NULL,
+        amount DECIMAL(10, 2) NOT NULL,
+        status ENUM('unused', 'used') DEFAULT 'unused',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     ";
-    $pdo->exec($sql_others);
+    $pdo->exec($sql);
 
-    // 2. Ensure admin user exists with both plain text and hashed password
+    // 2. Default Settings (Optional)
+    $pdo->exec("INSERT IGNORE INTO site_settings (setting_key, setting_value) VALUES ('tiktok_pixel_id', ''), ('facebook_pixel_id', '')");
+
+    // 3. Ensure admin user exists
     $username = 'admin';
     $password = 'admin';
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -77,9 +86,9 @@ try {
     if (!$stmt->fetch()) {
         $stmt = $pdo->prepare("INSERT INTO users (username, email, password, password_hash, role) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$username, 'admin@coinstorebd.com', $password, $password_hash, 'admin']);
-        echo "Admin user created successfully with plain and hashed passwords.<br>";
+        echo "Admin user created successfully.<br>";
     } else {
-        echo "Admin user already exists. Setup did not overwrite existing credentials.<br>";
+        echo "Admin user already exists.<br>";
     }
 
     echo "Database setup completed successfully. <b>Please DELETE this file for security.</b>";
