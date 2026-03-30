@@ -8,19 +8,21 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// Fetch summaries
+// Fetch summaries with error handling
 $counts = [
-    'promotions' => $pdo->query("SELECT COUNT(*) FROM promotions WHERE status = 'pending'")->fetchColumn(),
-    'coin_requests' => $pdo->query("SELECT COUNT(*) FROM coin_requests WHERE status = 'pending'")->fetchColumn(),
-    'business_apps' => $pdo->query("SELECT COUNT(*) FROM business_apps WHERE status = 'pending'")->fetchColumn(),
-    'trxids' => 0 // Default to 0 if table doesn't exist yet
+    'promotions' => 0,
+    'coin_requests' => 0,
+    'business_apps' => 0,
+    'trxids' => 0
 ];
 
-// Check if trxids table exists and fetch unused count
 try {
+    $counts['promotions'] = $pdo->query("SELECT COUNT(*) FROM promotions WHERE status = 'pending'")->fetchColumn();
+    $counts['coin_requests'] = $pdo->query("SELECT COUNT(*) FROM coin_requests WHERE status = 'pending'")->fetchColumn();
+    $counts['business_apps'] = $pdo->query("SELECT COUNT(*) FROM business_apps WHERE status = 'pending'")->fetchColumn();
     $counts['trxids'] = $pdo->query("SELECT COUNT(*) FROM trxids WHERE status = 'unused'")->fetchColumn();
 } catch (Exception $e) {
-    // Table might not exist yet
+    // Some tables might not exist yet, we'll just keep the default 0
 }
 
 ?>

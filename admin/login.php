@@ -14,14 +14,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    if ($username === 'admin' && $password === 'admin') {
-        // Direct match as requested
-        $_SESSION['admin_id'] = 1;
-        $_SESSION['admin_user'] = 'admin';
-        header("Location: index.php");
-        exit();
-    } else {
-        $error = "Invalid username or password.";
+    try {
+        // First check if 'users' table exists
+        $tableCheck = $pdo->query("SHOW TABLES LIKE 'users'")->rowCount();
+        if ($tableCheck == 0) {
+            $error = "Error: 'users' table does not exist. Please run setup_admin.php first.";
+        } else {
+            // Fetch user from database
+            $stmt = $pdo->prepare("SELECT id, username, password, role FROM users WHERE username = ? AND role = 'admin' LIMIT 1");
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+
+            if ($user) {
+                // Check plain text password directly from 'password' column
+                if ($password === $user['password']) {
+                    // Success: Set session variables
+                    $_SESSION['admin_id'] = $user['id'];
+                    $_SESSION['admin_user'] = $user['username'];
+                    $_SESSION['admin_role'] = $user['role'];
+                    
+                    header("Location: index.php");
+                    exit();
+                } else {
+                    $error = "Incorrect password.";
+                }
+            } else {
+                $error = "Admin user not found.";
+            }
+        }
+    } catch (PDOException $e) {
+        $error = "Database error: " . $e->getMessage();
     }
 }
 ?>
