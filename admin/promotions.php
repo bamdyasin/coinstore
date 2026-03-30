@@ -16,6 +16,9 @@ if (!in_array($current_tab, $allowed_tabs)) {
 
 // Handle Status Update or Delete
 if (isset($_GET['action']) && isset($_GET['id'])) {
+    if (!isset($_GET['csrf_token']) || !verify_csrf_token($_GET['csrf_token'])) {
+        die("CSRF token validation failed.");
+    }
     $id = $_GET['id'];
     $action = $_GET['action'];
     
@@ -197,11 +200,11 @@ if ($current_tab == 'pending') {
 
                 <div class="info-row">
                     <span class="info-label">Video:</span>
-                    <a href="<?php echo $p['video_link']; ?>" target="_blank" style="color: #3498db; word-break: break-all; font-size: 0.85rem;">Open Link 🔗</a>
+                    <a href="<?php echo htmlspecialchars($p['video_link']); ?>" target="_blank" style="color: #3498db; word-break: break-all; font-size: 0.85rem;">Open Link 🔗</a>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Type:</span>
-                    <span class="info-value"><?php echo $p['category']; ?></span>
+                    <span class="info-value"><?php echo htmlspecialchars($p['category']); ?></span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Budget:</span>
@@ -209,11 +212,11 @@ if ($current_tab == 'pending') {
                 </div>
                 <div class="info-row">
                     <span class="info-label">WhatsApp:</span>
-                    <span class="info-value"><?php echo $p['whatsapp']; ?></span>
+                    <span class="info-value"><?php echo htmlspecialchars($p['whatsapp']); ?></span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Payment:</span>
-                    <span class="info-value"><?php echo $p['payment_option']; ?></span>
+                    <span class="info-value"><?php echo htmlspecialchars($p['payment_option']); ?></span>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 8px; border-radius: 6px; font-size: 0.8rem; margin-top: 5px;">

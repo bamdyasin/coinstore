@@ -1,0 +1,35 @@
+--- CoinStoreBD Setup Tutorial ---
+
+1. Installation Process:
+-----------------------
+- Prothome apnar hosting ba local server-e database create korun.
+- 'includes/config.php' file-ti open kore database host, name, username, ebong password update korun.
+- Browser-e 'domain.com/setup_admin.php?key=secure_setup_2024' run korun. (Domain-er jaygay apnar local host ba live domain hobe).
+- System auto-table create korbe ebong default admin (user: admin, pass: admin) toiri korbe.
+
+2. Security: Installation-er por delete korar moto file:
+------------------------------------------------------
+Security-r jonno niche deya file gulo server theke MUST delete kore diben:
+- setup_admin.php
+- db_setup.sql
+- db_test.php
+
+3. Password Hashing (Database-e manually user add korle):
+--------------------------------------------------------
+Apni jodi database theke manually kono admin add korte chan, tobe password-ti plain text-e save korle login hobe na. Apnake password-ti 'hash' kore 'password_hash' column-e save korte hobe.
+Password hash toiri korar jonno niche deya PHP code-ti use korte paren:
+
+<?php
+echo password_hash("apnar_password_ekhane", PASSWORD_DEFAULT);
+?>
+
+Ei code-ti run korle je lamba string-ti paben, shetai database-er 'password_hash' column-e boshate hobe.
+
+4. Admin Login:
+---------------
+Admin dashboard access korar jonno 'domain.com/admin' link-e jan.
+Default Login: 
+- Username: admin
+- Password: admin
+
+(Shorobhesh upodesh: Prothom bar login korar por-i password change kore niben!)

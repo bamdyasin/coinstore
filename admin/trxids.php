@@ -11,6 +11,9 @@ $message = "";
 
 // Handle Add TrxID
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_trx'])) {
+    if (!isset($_POST['csrf_token']) || !verify_csrf_token($_POST['csrf_token'])) {
+        die("CSRF token validation failed.");
+    }
     $trxid = trim($_POST['transaction_id']);
     $method = $_POST['payment_method'];
     $amount = $_POST['amount'];
@@ -30,6 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_trx'])) {
 
 // Handle Delete
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
+    if (!isset($_GET['csrf_token']) || !verify_csrf_token($_GET['csrf_token'])) {
+        die("CSRF token validation failed.");
+    }
     $pdo->prepare("DELETE FROM trxids WHERE id = ?")->execute([$_GET['id']]);
     header("Location: trxids.php");
     exit();
@@ -110,6 +116,7 @@ $trxids = $pdo->query("SELECT * FROM trxids ORDER BY created_at DESC")->fetchAll
         <div class="add-form">
             <h4 style="margin-bottom: 1rem; color: #27ae60;">➕ Add New Transaction ID</h4>
             <form action="" method="POST">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <div class="form-group">
                     <label>Transaction ID</label>
                     <input type="text" name="transaction_id" placeholder="8N7X2M9P..." required>
@@ -146,7 +153,7 @@ $trxids = $pdo->query("SELECT * FROM trxids ORDER BY created_at DESC")->fetchAll
                         <span class="status-badge status-<?php echo $t['status']; ?>"><?php echo $t['status']; ?></span>
                     </div>
                 </div>
-                <a href="?action=delete&id=<?php echo $t['id']; ?>" class="delete-link" onclick="return confirm('Delete this TrxID?')">🗑️</a>
+                <a href="?action=delete&id=<?php echo $t['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="delete-link" onclick="return confirm('Delete this TrxID?')">🗑️</a>
             </div>
         <?php endforeach; ?>
     </div>

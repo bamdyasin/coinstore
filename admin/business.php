@@ -169,13 +169,13 @@ $pdo->query("UPDATE business_apps SET status = 'rejected' WHERE status = 'pendin
                 </div>
                 <div class="info-row">
                     <span class="info-label">Type:</span>
-                    <span class="info-value"><?php echo ucfirst($a['biz_type']); ?></span>
+                    <span class="info-value"><?php echo htmlspecialchars(ucfirst($a['biz_type'])); ?></span>
                 </div>
                 
                 <?php if ($a['website']): ?>
                 <div class="info-row">
                     <span class="info-label">Website:</span>
-                    <a href="<?php echo $a['website']; ?>" target="_blank" style="color: #3498db; font-size: 0.85rem;">Visit Site 🔗</a>
+                    <a href="<?php echo htmlspecialchars($a['website']); ?>" target="_blank" style="color: #3498db; font-size: 0.85rem;">Visit Site 🔗</a>
                 </div>
                 <?php endif; ?>
 
@@ -186,10 +186,16 @@ $pdo->query("UPDATE business_apps SET status = 'rejected' WHERE status = 'pendin
 
                 <div class="card-actions">
                     <?php if ($a['status'] == 'approved'): ?>
-                        <a href="?action=complete&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
+                        <a href="?action=complete&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>
                 </div>
+                <?php endforeach; ?>
+
+    </div>
+</body>
+</html>
+         </div>
                 <?php endforeach; ?>
 
     </div>
