@@ -16,6 +16,9 @@ if (!in_array($current_tab, $allowed_tabs)) {
 
 // Handle Status Update or Delete
 if (isset($_GET['action']) && isset($_GET['id'])) {
+    if (!isset($_GET['csrf_token']) || !verify_csrf_token($_GET['csrf_token'])) {
+        die("CSRF token validation failed.");
+    }
     $id = $_GET['id'];
     $action = $_GET['action'];
     
@@ -185,19 +188,15 @@ $pdo->query("UPDATE business_apps SET status = 'rejected' WHERE status = 'pendin
                 </div>
 
                 <div class="card-actions">
-                    <?php if ($a['status'] == 'approved'): ?>
+                    <?php if ($a['status'] == 'pending'): ?>
+                        <a href="?action=approve&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-approve">Approve ✅</a>
+                        <a href="?action=reject&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-reject">Reject ✖</a>
+                    <?php elseif ($a['status'] == 'approved'): ?>
                         <a href="?action=complete&id=<?php echo $a['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>
-                </div>
-                <?php endforeach; ?>
-
-    </div>
-</body>
-</html>
-         </div>
-                <?php endforeach; ?>
-
+            </div>
+        <?php endforeach; ?>
     </div>
 </body>
 </html>

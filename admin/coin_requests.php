@@ -210,8 +210,11 @@ if ($current_tab == 'pending') {
                 </div>
 
                 <div class="card-actions">
-                    <?php if ($r['status'] == 'approved'): ?>
-                        <a href="?action=complete&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
+                    <?php if ($r['status'] == 'pending'): ?>
+                        <a href="?action=approve&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-approve">Approve ✅</a>
+                        <a href="?action=reject&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-reject">Reject ✖</a>
+                    <?php elseif ($r['status'] == 'approved'): ?>
+                        <a href="?action=complete&id=<?php echo $r['id']; ?>&tab=<?php echo $current_tab; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="action-btn btn-complete" style="grid-column: span 2;">Mark Complete ⭐</a>
                     <?php endif; ?>
                 </div>
                 </div>

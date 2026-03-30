@@ -1,9 +1,9 @@
 <?php
 // Database configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'coinstorebd');
-define('DB_USER', 'root');
-define('DB_PASS', ''); // Set your password here
+define('DB_HOST', 'localhost'); // Set your database host/servername here
+define('DB_NAME', 'coinstore'); // Set your database name here
+define('DB_USER', 'root'); // Set your database username here
+define('DB_PASS', ''); // Set your database password here
 
 try {
     $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
@@ -12,7 +12,7 @@ try {
     // Set default fetch mode to associative array
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+    die("Connection failed: <br>" . $e->getMessage());
 }
 
 // Global functions (e.g., currency formatter)
